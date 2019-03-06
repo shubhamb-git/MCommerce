@@ -6,7 +6,6 @@
 //  Copyright © 2019 SB. All rights reserved.
 //
 
-
 class WSResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case categories

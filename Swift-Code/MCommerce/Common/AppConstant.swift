@@ -12,6 +12,5 @@ struct AppConstants {
     
     static private let protocolo    : String = "https://"
     static private let domain       : String = "stark-spire-93433.herokuapp.com"
-//    static private let apiPath      : String = "/json"
     static let baseUrl      : String = protocolo + domain
 }

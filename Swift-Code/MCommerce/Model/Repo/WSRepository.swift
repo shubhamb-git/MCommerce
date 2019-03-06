@@ -15,7 +15,7 @@ enum WSResponseData {
 
 class WSRepository: BaseService {
     
-    func getJsonData(with completion: @escaping (WSResponseData) -> Void ) {
+    func getCategories(with completion: @escaping (WSResponseData) -> Void ) {
         
         let endPoint = EndPoints.getJson
         super.callEndPoint(endPoint: endPoint.rawValue) { (response: ServiceResponse<WSResponse>) in
