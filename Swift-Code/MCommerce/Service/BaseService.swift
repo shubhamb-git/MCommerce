@@ -62,9 +62,22 @@ class BaseService {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     print(json)
+                    
+                    guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                        fatalError("Failed to retrieve managed object context")
+                    }
+                    WSRepository.clearStorage()
+                    
+                    let managedObjectContext = AppDelegate.shared.persistentContainer.viewContext
                     let decoder = JSONDecoder()
+                    decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+                    
                     let decodedValue = try decoder.decode(T.self, from: data)
+                    
+                    AppDelegate.shared.saveContext()
+                    
                     completion(.success(response: decodedValue))
+
                     return
                 }catch {
                     print(error)

@@ -14,14 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    static var shared: AppDelegate!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        AppDelegate.shared = self
         return true
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
     }
     
     // MARK: - Core Data stack

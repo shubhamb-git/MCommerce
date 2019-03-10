@@ -24,20 +24,25 @@ class CategoryViewModel {
         repository = WSRepository()
     }
     
-    func getCategories() {
+    func getCategories(with parentCategoryId: String? = nil) {
+        
         guard let repo = repository else { return }
         
-        repo.getCategories { [weak self](response) in
-            guard let strongSelf = self else { return }
+        if let parentCategoryId = parentCategoryId {
             
-            switch response {
-            case .success(let result):
-                if let categories = result.categories {
-                    strongSelf.categories = categories
+        } else {
+            repo.getCategories { [weak self](response) in
+                guard let strongSelf = self else { return }
+                
+                switch response {
+                case .success(let result):
+                    if let categories = result.categories {
+                        strongSelf.categories = categories
+                    }
+                    strongSelf.delegate?.didReceiveResponse()
+                case.failure:
+                    strongSelf.delegate?.didFailed()
                 }
-                strongSelf.delegate?.didReceiveResponse()
-            case.failure:
-                strongSelf.delegate?.didFailed()
             }
         }
     }
